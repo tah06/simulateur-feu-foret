@@ -1,6 +1,6 @@
-package com.jennie.forestfire.config;
+package com.forestfire.config;
 
-import com.jennie.forestfire.model.Position;
+import com.forestfire.model.Position;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,9 +14,7 @@ import java.util.Properties;
 
 /**
  * Charge la configuration de la simulation depuis un fichier au format
- * "java.util.Properties" (cle=valeur), choisi car nativement supporte par le
- * JDK (aucune dependance externe necessaire) et lisible/modifiable a la main.
- *
+ * 
  * Format attendu (voir config/forest.properties pour un exemple complet) :
  *   grid.height=10
  *   grid.width=10
@@ -66,9 +64,9 @@ public final class ConfigLoader {
         }
 
         Long seed = null;
-        String seedRaw = props.getProperty("simulation.seed");
-        if (seedRaw != null && !seedRaw.isBlank()) {
-            seed = Long.parseLong(seedRaw.trim());
+        String seedStr = props.getProperty("simulation.seed");
+        if (seedStr != null && !seedStr.isBlank()) {
+            seed = Long.parseLong(seedStr.trim());
         }
 
         return new SimulationConfig(height, width, probability, initialFires, seed);

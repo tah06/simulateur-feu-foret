@@ -11,8 +11,8 @@ javac -cp out -d out-test $(find src/test -name "*.java")
 
 echo
 echo "== Tests =="
-java -cp out:out-test com.jennie.forestfire.TestRunner
+java -cp out:out-test com.forestfire.ForestFireTests 
 
 echo
 echo "== Simulation (config: ${CONFIG_PATH}) =="
-java -cp out com.jennie.forestfire.app.Main "${CONFIG_PATH}"
+java -cp out com.forestfire.app.Main "${CONFIG_PATH}"

@@ -1,16 +1,12 @@
-package com.jennie.forestfire.config;
+package com.forestfire.config;
 
-import com.jennie.forestfire.model.Position;
+import com.forestfire.model.Position;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Parametres de la simulation, tels que lus depuis le fichier de configuration.
- * Objet immuable : une fois charge, une configuration ne peut pas etre modifiee
- * "en cours de route" par erreur.
- */
+/** Parametres de la simulation */
 public final class SimulationConfig {
 
     private final int height;

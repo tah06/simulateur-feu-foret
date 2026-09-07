@@ -1,17 +1,10 @@
-package com.jennie.forestfire.render;
+package com.forestfire.render;
 
-import com.jennie.forestfire.model.CellState;
-import com.jennie.forestfire.model.Grid;
-import com.jennie.forestfire.model.Position;
+import com.forestfire.model.CellState;
+import com.forestfire.model.Grid;
+import com.forestfire.model.Position;
 
-/**
- * Rendu texte (ASCII) d'une grille dans la console.
- *
- * Isole volontairement du moteur de simulation : Simulation ne sait pas que
- * ce renderer existe. On pourrait demain ajouter un renderer HTML/Swing/JSON
- * sans toucher a la logique metier - simple respect du principe de
- * responsabilite unique (SRP) et d'inversion de dependance.
- */
+/** Rendu texte (ASCII) d'une grille dans la console. */
 public final class ConsoleRenderer {
 
     private static final char HEALTHY_SYMBOL = '.';

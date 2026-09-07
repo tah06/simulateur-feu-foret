@@ -1,18 +1,9 @@
-package com.jennie.forestfire.model;
+package com.forestfire.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represente la foret sous forme d'une grille h x l.
- *
- * Choix de conception : cette classe reste volontairement "anemique" :
- * elle ne connait que la structure (dimensions, etat des cases, voisinage)
- * mais ignore totalement les regles de propagation du feu. La logique
- * metier (comment le feu se propage) vit dans le package `engine`.
- * Cela permet de tester la grille et le moteur de simulation independamment,
- * et de faire evoluer les regles de propagation sans toucher au modele.
- */
+/** Represente la foret sous forme d'une grille h x l. */
 public class Grid {
 
     private final int height;
@@ -31,7 +22,6 @@ public class Grid {
         }
     }
 
-    /** Constructeur de copie profonde, utilise pour produire l'etat a t+1 sans muter l'etat courant. */
     public Grid(Grid other) {
         this.height = other.height;
         this.width = other.width;
@@ -87,7 +77,6 @@ public class Grid {
         return false;
     }
 
-    /** Compte les cases dans un etat donne, pratique pour des statistiques / tests. */
     public int countState(CellState state) {
         int count = 0;
         for (CellState[] row : cells) {

@@ -1,13 +1,8 @@
-package com.jennie.forestfire.model;
+package com.forestfire.model;
 
 import java.util.Objects;
 
-/**
- * Coordonnee immuable (ligne, colonne) dans la grille.
- * Type dedie plutot qu'un simple tableau d'int : plus lisible,
- * plus sur (pas d'inversion ligne/colonne possible par erreur),
- * et fournit equals/hashCode pour etre utilisable dans des collections.
- */
+/** Coordonnee (ligne, colonne) dans la grille. */
 public final class Position {
 
     private final int row;

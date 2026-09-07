@@ -1,4 +1,4 @@
-package com.jennie.forestfire;
+package com.forestfire;
 
 /**
  * Mini-utilitaire d'assertions, pour rester sans dependance externe (pas de

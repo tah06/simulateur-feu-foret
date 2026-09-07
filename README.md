@@ -23,13 +23,13 @@ javac -d out $(find src/main -name "*.java")
 
 # Compiler et lancer les tests
 javac -cp out -d out-test $(find src/test -name "*.java")
-java -cp out:out-test com.jennie.forestfire.TestRunner
+java -cp out:out-test com.forestfire.TestRunner
 
 # Lancer la simulation (config par defaut : config/forest.properties)
-java -cp out com.jennie.forestfire.app.Main
+java -cp out com.forestfire.app.Main
 
 # Ou avec une configuration specifique
-java -cp out com.jennie.forestfire.app.Main config/forest-multi-fire.properties
+java -cp out com.forestfire.app.Main config/forest-multi-fire.properties
 ```
 
 Un script `run.sh` fait ces trois etapes en une commande : `./run.sh [chemin-config]`.
@@ -85,7 +85,7 @@ Deux exemples fournis : `config/forest.properties` (un seul foyer) et
 ## Architecture
 
 ```
-com.jennie.forestfire
+com.forestfire
 ├── model      -> structures de donnees pures (Grid, CellState, Position)
 ├── engine     -> regles metier de propagation (Simulation, RandomProvider)
 ├── config     -> lecture et validation du fichier de configuration
@@ -148,13 +148,3 @@ suis a l'aise pour le faire en direct pendant l'entretien si vous le souhaitez.
 - **Historique non conserve par defaut.** `Simulation` n'expose que l'etat courant ; si l'on veut
   rejouer/animer toutes les etapes a posteriori, il suffirait de faire consommer le callback de `run()`
   par une liste au lieu d'un affichage direct - deja prevu par la signature `Consumer<Grid>`.
-
-## Points a mettre en avant en entretien
-
-- Le raisonnement sur la **simultanite des transitions** (copie immuable de l'etat) : c'est le piege
-  principal de l'exercice, et je peux montrer avec un exemple concret ce qui se passerait si on mutait
-  la grille en place.
-- L'**injection du generateur aleatoire** comme demonstration de testabilite d'un systeme stochastique.
-- La facon dont le **decoupage en packages traduit des responsabilites metier** (pas juste "je range
-  les fichiers"), et ce que ca permettrait de faire evoluer facilement.
-- Le compromis assume sur l'absence de JUnit, et la preuve que la migration serait triviale.
