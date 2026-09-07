@@ -26,6 +26,8 @@ public final class Main {
     public static void main(String[] args) {
         String configFile = args.length > 0 ? args[0] : "config/forest.properties";
 
+
+        
         SimulationConfig config;
         try {
             config = ConfigLoader.load(Path.of(configFile));
