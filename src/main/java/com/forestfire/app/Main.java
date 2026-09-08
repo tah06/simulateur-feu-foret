@@ -8,7 +8,7 @@ import com.forestfire.engine.Simulation;
 import com.forestfire.model.CellState;
 import com.forestfire.model.Grid;
 import com.forestfire.model.Position;
-import com.forestfire.render.ConsoleRenderer;
+import com.forestfire.render.SwingRenderer;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -51,12 +51,29 @@ public final class Main {
 
         Simulation simulation = new Simulation(grid, config.getProbability(), random);
 
-        System.out.println("Simulation demarree : grille " + config.getHeight() + "x" + config.getWidth()
-                + ", p=" + config.getProbability() + ", foyers initiaux=" + config.getInitialFires());
-        System.out.println();
-        ConsoleRenderer.render(simulation.getCurrentGrid(), simulation.getStepCount());
+        // 1. Initialiser l'interface graphique sur le thread dédié de Swing
+        SwingRenderer[] rendererHolder = new SwingRenderer[1];
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            rendererHolder[0] = SwingRenderer.createAndShowGUI(simulation.getCurrentGrid());
+        });
 
-        simulation.run(MAX_STEPS, g -> ConsoleRenderer.render(g, simulation.getStepCount()));
+        System.out.println("Simulation demarree dans la fenetre graphique...");
+        
+        // 2. Lancer la simulation avec un délai pour voir l'animation
+        simulation.run(MAX_STEPS, g -> {
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                if (rendererHolder[0] != null) {
+                    rendererHolder[0].updateGrid(g, simulation.getStepCount());
+                }
+            });
+
+            // Ralentir la boucle pour que l'oeil humain puisse voir le feu se propager (150 millisecondes)
+            try {
+                Thread.sleep(350);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
 
         System.out.println("Simulation terminee en " + simulation.getStepCount() + " etapes.");
     }
